@@ -1,0 +1,10 @@
+{
+  "name": "skillbrew",
+  "description": "Back up, restore, and sync your Claude Code setup to GitHub in 1 command.",
+  "version": "1.0.0",
+  "author": { "name": "Rishiidev" },
+  "homepage": "https://Rishiidev.github.io/skillbrew",
+  "repository": "https://github.com/Rishiidev/skillbrew",
+  "license": "MIT",
+  "skills": "./skill"
+}

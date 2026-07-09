@@ -1,0 +1,19 @@
+{
+  "name": "skillbrew",
+  "owner": {
+    "name": "Rishiidev",
+    "url": "https://github.com/Rishiidev"
+  },
+  "metadata": {
+    "description": "Back up, restore, and sync your Claude Code setup to GitHub in 1 command.",
+    "version": "1.0.0",
+    "repository": "https://github.com/Rishiidev/skillbrew"
+  },
+  "plugins": [
+    {
+      "name": "skillbrew",
+      "description": "Backs up skills, plugins, agents, and MCP connectors to a GitHub repo you own, then rebuilds them on any machine with one command. Trigger with \"backup my skills\" or \"restore my setup\". Works with Claude Code, Claude Desktop, and claude.ai (zip export).",
+      "source": "./"
+    }
+  ]
+}

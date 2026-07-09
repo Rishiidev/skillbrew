@@ -1,0 +1,22 @@
+name: Package skill
+on:
+  release:
+    types: [created]
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package .skill file
+        run: |
+          mkdir -p /tmp/skill-pkg/skill-pkg/skillbrew
+          cp skill/SKILL.md /tmp/skill-pkg/skill-pkg/skillbrew/
+          cd /tmp/skill-pkg
+          zip -r skillbrew.skill skill-pkg/
+          cp skillbrew.skill "$GITHUB_WORKSPACE/"
+      - name: Upload .skill to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: skillbrew.skill

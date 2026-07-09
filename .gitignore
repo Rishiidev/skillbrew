@@ -3,3 +3,11 @@ bruuhh-studios/
 graphify-env/
 .DS_Store
 node_modules/
+*.log
+*.tgz
+.env
+.env.*
+*.pem
+*.key
+secrets.local.json
+exports/

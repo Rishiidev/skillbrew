@@ -1,0 +1,25 @@
+name: Validate
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Check README exists
+        run: test -f README.md && echo "✓ README.md found"
+      - name: Check plugin.json exists
+        run: test -f .claude-plugin/plugin.json && echo "✓ plugin.json found"
+      - name: Check social preview exists
+        run: test -f assets/social-preview.svg && echo "✓ social preview found"
+      - name: Check SKILL.md exists
+        run: test -f skill/SKILL.md && echo "✓ SKILL.md found"
+      - name: Lint JSON files
+        run: |
+          for f in $(find . -name "*.json" -not -path "*/node_modules/*" -not -path "*/graphify-env/*" -not -path "*/bruuhh-studios/*"); do
+            python3 -c "import json,sys; json.load(open('$f'))" && echo "✓ $f valid" || exit 1
+          done
+      - name: Run tests
+        run: node --test test/skillbrew.test.js

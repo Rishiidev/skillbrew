@@ -2,7 +2,7 @@
 // real values live in secrets.local.json which is gitignored. Restore merges
 // them back when the file is present, otherwise prints a re-key checklist.
 
-export const REDACTED = '«RISHIIDEV-REDACTED»';
+export const REDACTED = '«SKILLBREW-REDACTED»';
 
 const SECRET_KEY_RE = /token|key|secret|password|credential/i;
 

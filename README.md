@@ -1,16 +1,31 @@
-# skillbrew
+# ⚡ skillbrew — never lose your Claude Code setup again
 
-Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, MCP connectors, config. One command to save it all to a GitHub repo you own, one command to rebuild it on any machine.
+<div align="center">
+  <img src="assets/social-preview.svg" alt="skillbrew — backup, restore and sync your Claude Code setup" width="100%"/>
+  <br/><br/>
 
-## Install
+**One command backs up your entire Claude Code setup — skills, plugins, agents, and MCP connectors — and rebuilds it on a fresh machine with a second command.**
 
-```bash
-npm install -g skillbrew
-# or, without installing:
-npx skillbrew init --github
-```
+[![Stars](https://img.shields.io/github/stars/Rishiidev/skillbrew?style=for-the-badge&color=gold)](https://github.com/Rishiidev/skillbrew/stargazers)
+[![CI](https://github.com/Rishiidev/skillbrew/actions/workflows/validate.yml/badge.svg)](https://github.com/Rishiidev/skillbrew/actions)
+[![License](https://img.shields.io/github/license/Rishiidev/skillbrew?style=for-the-badge)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)](https://github.com/Rishiidev/skillbrew/releases)
 
-## Use
+*Works in Claude Code · Claude Desktop · claude.ai*
+
+</div>
+
+> One command backs up your entire Claude Code setup — skills, plugins, agents, and MCP connectors — and rebuilds it on a fresh machine with a second command.
+
+---
+
+## The Problem
+
+A machine reset or laptop switch wipes `~/.claude` — every custom skill, agent, plugin install, and MCP connector config has to be rebuilt by hand from memory, one `npm install` and re-auth at a time. There's no record of what was even installed, so half the setup is quietly lost.
+
+## The Fix
+
+`skillbrew snapshot` commits and pushes your skills, agents, plugin list, and sanitized MCP connectors to a private GitHub repo you own. On a new machine, `skillbrew restore` rebuilds `~/.claude`, reinstalls plugins, and prints an exact re-auth checklist — nothing is ever overwritten without a timestamped backup first.
 
 ```bash
 skillbrew init --github     # create YOUR OWN private backup repo
@@ -18,6 +33,26 @@ skillbrew snapshot          # save everything, commit, push
 # ...machine reset happens...
 skillbrew restore           # rebuild ~/.claude, reinstall plugins, print re-auth checklist
 ```
+
+---
+
+## Install
+
+| Platform | Command |
+|----------|---------|
+| **npm** | `npm install -g skillbrew` |
+| **npx (no install)** | `npx skillbrew init --github` |
+| **Claude Code / Desktop** | `git clone https://github.com/Rishiidev/skillbrew` then run via `node` |
+| **claude.ai** | Download [`skillbrew.skill`](../../releases/latest) → Settings → Capabilities → import |
+
+---
+
+<div align="center">
+<b>Backs up skills, plugins, agents and MCP connectors across 4 platforms. Star it — 2 seconds.</b><br>
+<a href="https://github.com/Rishiidev/skillbrew">⭐ Star on GitHub</a>
+</div>
+
+---
 
 ## Fresh machine (nothing installed yet)
 
@@ -53,6 +88,7 @@ The agent is the installer. Swap in whatever repo `skillbrew init --github` crea
 - Secrets (env values, MCP tokens/headers) are **redacted** in the repo and kept in `secrets.local.json` (gitignored). Restore merges them back if the file exists, otherwise prints exactly what needs re-keying.
 - OAuth sessions can't be copied — restore prints a re-auth checklist.
 - Backup repo is created **private** by default.
+- `skillbrew install <github:repo>` clones and copies an arbitrary source's skills into `~/.claude/skills` — only install from sources you trust. See [SECURITY.md](SECURITY.md).
 
 ## Design notes
 
@@ -61,4 +97,21 @@ The agent is the installer. Swap in whatever repo `skillbrew init --github` crea
 - `node_modules` never backed up; restore prints an `npm install` note per affected skill.
 - Env overrides `SKILLBREW_CLAUDE_HOME` / `SKILLBREW_CLAUDE_JSON` / `SKILLBREW_REPO` / `SKILLBREW_CONFIG` let tests run against a fake home; `claude` CLI calls are skipped in that mode.
 
-MIT
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Rishiidev/skillbrew&type=Date)](https://star-history.com/#Rishiidev/skillbrew&Date)
+
+---
+
+MIT License · [Rishiidev](https://github.com/Rishiidev)
+
+---
+
+<div align="center">
+<b>Found skillbrew useful? A ⭐ helps others find it.</b><br>
+<a href="https://github.com/Rishiidev/skillbrew">⭐ Star this repo</a>
+</div>
