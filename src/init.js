@@ -58,6 +58,10 @@ export function init(dirArg, { github = false } = {}) {
   cfg.repoDir = dir;
   saveBunchConfig(cfg);
 
+  // gh repo create --push needs at least one commit
+  run('git', ['add', '-A'], { cwd: dir });
+  run('git', ['commit', '-m', 'bunch init'], { cwd: dir });
+
   let remote = null;
   if (github) {
     const name = path.basename(dir);

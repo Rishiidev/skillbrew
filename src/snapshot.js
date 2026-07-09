@@ -23,13 +23,26 @@ export function snapshot() {
   rmrf(skillsDest);
   if (exists(skillsSrc)) {
     for (const entry of fs.readdirSync(skillsSrc, { withFileTypes: true })) {
-      if (!entry.isDirectory()) continue;
-      const src = path.join(skillsSrc, entry.name);
+      // Symlinked skills (e.g. into another tool's scratch dir) are the first
+      // casualties of a reset — dereference and back up the real content.
+      let src = path.join(skillsSrc, entry.name);
+      let linked = false;
+      if (entry.isSymbolicLink()) {
+        try {
+          src = fs.realpathSync(src);
+          if (!fs.statSync(src).isDirectory()) continue;
+          linked = true;
+        } catch {
+          console.log(`  skip ${entry.name}: broken symlink`);
+          continue;
+        }
+      } else if (!entry.isDirectory()) continue;
       const { hasNodeModules } = copyDir(src, path.join(skillsDest, entry.name));
       items.push({
         name: entry.name,
         type: 'skill',
         source: shortSource(gitRemote(src)),
+        linked,
         hasNodeModules,
         platforms: platformsFor('skill'),
       });
