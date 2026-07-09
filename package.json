@@ -9,5 +9,30 @@
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "Rishabh Sethiya",
+  "homepage": "https://github.com/Rishiidev/skillbrew#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishiidev/skillbrew.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rishiidev/skillbrew/issues"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "skills",
+    "backup",
+    "sync",
+    "mcp",
+    "package-manager"
+  ],
+  "files": [
+    "bin",
+    "src",
+    "skill",
+    "README.md",
+    "LICENSE"
+  ]
 }

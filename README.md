@@ -1,9 +1,19 @@
 # skillbrew
 
-Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, MCP connectors, config. One command to save it all to a GitHub repo, one command to rebuild it on any machine.
+Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, MCP connectors, config. One command to save it all to a GitHub repo you own, one command to rebuild it on any machine.
+
+## Install
 
 ```bash
-skillbrew init --github     # create private backup repo
+npm install -g skillbrew
+# or, without installing:
+npx skillbrew init --github
+```
+
+## Use
+
+```bash
+skillbrew init --github     # create YOUR OWN private backup repo
 skillbrew snapshot          # save everything, commit, push
 # ...machine reset happens...
 skillbrew restore           # rebuild ~/.claude, reinstall plugins, print re-auth checklist
@@ -13,9 +23,9 @@ skillbrew restore           # rebuild ~/.claude, reinstall plugins, print re-aut
 
 Paste into a fresh Claude Code session:
 
-> Clone https://github.com/Rishiidev/skillbrew and my backup repo https://github.com/Rishiidev/skillbrew-backup, then run `SKILLBREW_REPO=<backup-clone> node skillbrew/bin/skillbrew.js restore` and walk me through the re-auth checklist.
+> Clone https://github.com/Rishiidev/skillbrew and my backup repo `<your-backup-repo-url>`, then run `SKILLBREW_REPO=<backup-clone> node skillbrew/bin/skillbrew.js restore` and walk me through the re-auth checklist.
 
-The agent is the installer.
+The agent is the installer. Swap in whatever repo `skillbrew init --github` created for you — it's yours, not a shared one.
 
 ## Commands
 
