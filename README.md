@@ -1,19 +1,19 @@
-# rishiidev
+# skillbrew
 
 Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, MCP connectors, config. One command to save it all to a GitHub repo, one command to rebuild it on any machine.
 
 ```bash
-rishiidev init --github     # create private backup repo
-rishiidev snapshot          # save everything, commit, push
+skillbrew init --github     # create private backup repo
+skillbrew snapshot          # save everything, commit, push
 # ...machine reset happens...
-rishiidev restore           # rebuild ~/.claude, reinstall plugins, print re-auth checklist
+skillbrew restore           # rebuild ~/.claude, reinstall plugins, print re-auth checklist
 ```
 
 ## Fresh machine (nothing installed yet)
 
 Paste into a fresh Claude Code session:
 
-> Clone https://github.com/Rishiidev/rishiidev and my backup repo https://github.com/Rishiidev/rishiidev-backup, then run `RISHIIDEV_REPO=<backup-clone> node rishiidev/bin/rishiidev.js restore` and walk me through the re-auth checklist.
+> Clone https://github.com/Rishiidev/skillbrew and my backup repo https://github.com/Rishiidev/skillbrew-backup, then run `SKILLBREW_REPO=<backup-clone> node skillbrew/bin/skillbrew.js restore` and walk me through the re-auth checklist.
 
 The agent is the installer.
 
@@ -21,14 +21,14 @@ The agent is the installer.
 
 | Command | Does |
 |---|---|
-| `rishiidev init [dir] [--github]` | Create backup repo (default `~/rishiidev-backup`), `--github` adds private remote via `gh` |
-| `rishiidev snapshot` | Copy skills/agents/config, record plugins + marketplaces + MCP connectors, commit + push |
-| `rishiidev restore [--pack <name>]` | Rebuild `~/.claude`. Current state copied to `~/.claude.pre-restore-<ts>` first — never destructive |
-| `rishiidev pack create <name> <skill...>` | Named skill collection |
-| `rishiidev pack list` / `pack install <name>` | Show / install a collection |
-| `rishiidev export --chat [--pack p]` | Per-skill zips for claude.ai → Settings → Capabilities upload |
-| `rishiidev install <github:user/repo\|url\|path> [--pack p] [--force]` | Install skills from any rishiidev-format repo |
-| `rishiidev list` | Everything tracked, with platform badges |
+| `skillbrew init [dir] [--github]` | Create backup repo (default `~/skillbrew-backup`), `--github` adds private remote via `gh` |
+| `skillbrew snapshot` | Copy skills/agents/config, record plugins + marketplaces + MCP connectors, commit + push |
+| `skillbrew restore [--pack <name>]` | Rebuild `~/.claude`. Current state copied to `~/.claude.pre-restore-<ts>` first — never destructive |
+| `skillbrew pack create <name> <skill...>` | Named skill collection |
+| `skillbrew pack list` / `pack install <name>` | Show / install a collection |
+| `skillbrew export --chat [--pack p]` | Per-skill zips for claude.ai → Settings → Capabilities upload |
+| `skillbrew install <github:user/repo\|url\|path> [--pack p] [--force]` | Install skills from any skillbrew-format repo |
+| `skillbrew list` | Everything tracked, with platform badges |
 
 ## What travels where (honest tiers)
 
@@ -49,6 +49,6 @@ The agent is the installer.
 - Plugins are recorded as `name@marketplace` + source URL and reinstalled via `claude plugin` — never cache-copied, so versions stay clean.
 - Nested `.git` dirs are stripped from skill copies; the origin remote is recorded as `source` (so a picker/marketplace can link back to the original repo).
 - `node_modules` never backed up; restore prints an `npm install` note per affected skill.
-- Env overrides `RISHIIDEV_CLAUDE_HOME` / `RISHIIDEV_CLAUDE_JSON` / `RISHIIDEV_REPO` / `RISHIIDEV_CONFIG` let tests run against a fake home; `claude` CLI calls are skipped in that mode.
+- Env overrides `SKILLBREW_CLAUDE_HOME` / `SKILLBREW_CLAUDE_JSON` / `SKILLBREW_REPO` / `SKILLBREW_CONFIG` let tests run against a fake home; `claude` CLI calls are skipped in that mode.
 
 MIT

@@ -21,7 +21,7 @@ export function restore({ pack = null, skillsOnly = false } = {}) {
   if (exists(home)) {
     const backup = `${home}.pre-restore-${new Date().toISOString().replace(/[:.]/g, '-')}`;
     copyDir(home, backup, { skipNodeModules: false });
-    console.log(`rishiidev: existing setup copied to ${backup}`);
+    console.log(`skillbrew: existing setup copied to ${backup}`);
   }
   mkdirp(home);
 
@@ -45,7 +45,7 @@ export function restore({ pack = null, skillsOnly = false } = {}) {
     const item = manifest.items.find((i) => i.type === 'skill' && i.name === name);
     if (item?.hasNodeModules) npmNote.push(name);
   }
-  console.log(`rishiidev: restored ${restored} skills${pack ? ` (pack: ${pack})` : ''}`);
+  console.log(`skillbrew: restored ${restored} skills${pack ? ` (pack: ${pack})` : ''}`);
 
   if (pack || skillsOnly) return finishReport({ npmNote, manifest, redacted: [] });
 
@@ -75,13 +75,13 @@ export function restore({ pack = null, skillsOnly = false } = {}) {
     const cj = readJson(cjPath, {});
     cj.mcpServers = { ...(cj.mcpServers || {}), ...mcpRepo };
     writeJson(cjPath, cj);
-    console.log(`rishiidev: merged ${Object.keys(mcpRepo).length} connectors into ${cjPath}`);
+    console.log(`skillbrew: merged ${Object.keys(mcpRepo).length} connectors into ${cjPath}`);
   }
 
   // --- plugins: reinstall from source via claude CLI ---
   // claude CLI always operates on the real ~/.claude; when a test/home
   // override is active it must not run, only print the commands.
-  const haveClaude = !process.env.RISHIIDEV_CLAUDE_HOME && run('claude', ['--version']).ok;
+  const haveClaude = !process.env.SKILLBREW_CLAUDE_HOME && run('claude', ['--version']).ok;
   const cmds = [];
   for (const [name, url] of Object.entries(manifest.marketplaces || {})) {
     if (url) cmds.push(['plugin', 'marketplace', 'add', url]);
@@ -96,7 +96,7 @@ export function restore({ pack = null, skillsOnly = false } = {}) {
       console.log(`  claude ${args.join(' ')} ${r.ok ? 'ok' : `FAILED: ${(r.stderr || r.stdout).split('\n')[0]}`}`);
     }
   } else if (cmds.length) {
-    console.log('rishiidev: claude CLI not found — run these after installing Claude Code:');
+    console.log('skillbrew: claude CLI not found — run these after installing Claude Code:');
     for (const args of cmds) console.log(`  claude ${args.join(' ')}`);
   }
 
@@ -105,15 +105,15 @@ export function restore({ pack = null, skillsOnly = false } = {}) {
 
 function finishReport({ npmNote, manifest, redacted }) {
   if (npmNote.length) {
-    console.log(`rishiidev: these skills had node_modules (not backed up) — run npm install inside each: ${npmNote.join(', ')}`);
+    console.log(`skillbrew: these skills had node_modules (not backed up) — run npm install inside each: ${npmNote.join(', ')}`);
   }
   const needAuth = (manifest.connectors || []).filter((c) => c.needsAuth).map((c) => c.name);
   if (needAuth.length) {
-    console.log(`rishiidev: re-auth checklist (OAuth/keys cannot be copied): ${needAuth.join(', ')}`);
+    console.log(`skillbrew: re-auth checklist (OAuth/keys cannot be copied): ${needAuth.join(', ')}`);
   }
   if (redacted.length) {
-    console.log(`rishiidev: still-redacted values needing manual re-key (no secrets.local.json found for them):`);
+    console.log(`skillbrew: still-redacted values needing manual re-key (no secrets.local.json found for them):`);
     for (const r of redacted) console.log(`  ${r}`);
   }
-  console.log('rishiidev: restore complete — restart Claude Code to load everything');
+  console.log('skillbrew: restore complete — restart Claude Code to load everything');
 }

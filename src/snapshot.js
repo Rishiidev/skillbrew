@@ -128,7 +128,7 @@ export function snapshot() {
   }
 
   const skillCount = items.filter((i) => i.type === 'skill').length;
-  console.log(`rishiidev: snapshot done — ${skillCount} skills, ${plugins.length} plugins, ${connectors.length} connectors`);
+  console.log(`skillbrew: snapshot done — ${skillCount} skills, ${plugins.length} plugins, ${connectors.length} connectors`);
   console.log(`  repo: ${repo}${pushed ? ' (pushed)' : gitRemote(repo) ? ' (push FAILED — check remote)' : ' (local only)'}`);
   if (!commit.ok && !/nothing to commit/.test(commit.stdout + commit.stderr)) {
     console.log(`  commit: ${commit.stderr || commit.stdout}`);

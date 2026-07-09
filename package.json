@@ -1,10 +1,10 @@
 {
-  "name": "rishiidev",
+  "name": "skillbrew",
   "version": "0.1.0",
   "description": "Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, connectors, config.",
   "type": "module",
   "bin": {
-    "rishiidev": "bin/rishiidev.js"
+    "skillbrew": "bin/skillbrew.js"
   },
   "engines": {
     "node": ">=18"

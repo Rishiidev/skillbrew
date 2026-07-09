@@ -15,7 +15,7 @@ const COLS = ['claude-code', 'claude-ai', 'gemini-cli', 'chatgpt'];
 
 export function list() {
   const manifest = loadManifest(repoDir());
-  if (!manifest.lastSnapshot) return console.log('rishiidev: no snapshot yet — run rishiidev snapshot');
+  if (!manifest.lastSnapshot) return console.log('skillbrew: no snapshot yet — run skillbrew snapshot');
 
   console.log(`Last snapshot: ${manifest.lastSnapshot} on ${manifest.machine}\n`);
   const header = ['TYPE', 'NAME', ...COLS.map((c) => c.toUpperCase())];

@@ -35,7 +35,7 @@ export function platformsFor(type) {
 export function emptyManifest() {
   return {
     manifestVersion: MANIFEST_VERSION,
-    tool: 'rishiidev',
+    tool: 'skillbrew',
     createdAt: new Date().toISOString(),
     lastSnapshot: null,
     machine: null,
