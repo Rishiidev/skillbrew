@@ -1,6 +1,7 @@
 # unrelated pre-existing dirs in this folder
 bruuhh-studios/
 graphify-env/
+.claude/
 .DS_Store
 node_modules/
 *.log
