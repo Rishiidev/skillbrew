@@ -30,5 +30,5 @@ export function exportChat({ pack = null } = {}) {
     if (r.ok) made++;
     else console.log(`  ${name}: zip failed — ${r.stderr}`);
   }
-  console.log(`bunch: ${made} zips in ${outDir} — upload each at claude.ai → Settings → Capabilities → Skills`);
+  console.log(`rishiidev: ${made} zips in ${outDir} — upload each at claude.ai → Settings → Capabilities → Skills`);
 }

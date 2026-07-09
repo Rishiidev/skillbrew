@@ -3,34 +3,34 @@ import path from 'node:path';
 import fs from 'node:fs';
 
 export function claudeHome() {
-  return process.env.BUNCH_CLAUDE_HOME || path.join(os.homedir(), '.claude');
+  return process.env.RISHIIDEV_CLAUDE_HOME || path.join(os.homedir(), '.claude');
 }
 
 // User-scope MCP servers live in ~/.claude.json, not ~/.claude/
 export function claudeJsonPath() {
-  return process.env.BUNCH_CLAUDE_JSON || path.join(os.homedir(), '.claude.json');
+  return process.env.RISHIIDEV_CLAUDE_JSON || path.join(os.homedir(), '.claude.json');
 }
 
-export function bunchConfigPath() {
-  return process.env.BUNCH_CONFIG || path.join(os.homedir(), '.bunch.json');
+export function rishiidevConfigPath() {
+  return process.env.RISHIIDEV_CONFIG || path.join(os.homedir(), '.rishiidev.json');
 }
 
-export function loadBunchConfig() {
+export function loadRishiidevConfig() {
   try {
-    return JSON.parse(fs.readFileSync(bunchConfigPath(), 'utf8'));
+    return JSON.parse(fs.readFileSync(rishiidevConfigPath(), 'utf8'));
   } catch {
     return {};
   }
 }
 
-export function saveBunchConfig(cfg) {
-  fs.writeFileSync(bunchConfigPath(), JSON.stringify(cfg, null, 2) + '\n');
+export function saveRishiidevConfig(cfg) {
+  fs.writeFileSync(rishiidevConfigPath(), JSON.stringify(cfg, null, 2) + '\n');
 }
 
 export function repoDir() {
-  const dir = process.env.BUNCH_REPO || loadBunchConfig().repoDir;
+  const dir = process.env.RISHIIDEV_REPO || loadRishiidevConfig().repoDir;
   if (!dir) {
-    throw new Error('No backup repo configured. Run: bunch init [dir]');
+    throw new Error('No backup repo configured. Run: rishiidev init [dir]');
   }
   return dir;
 }

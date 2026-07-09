@@ -1,4 +1,4 @@
-# bunch — design spec (2026-07-09)
+# rishiidev — design spec (2026-07-09)
 
 Full strategy + phased roadmap: see approved plan (`~/.claude/plans/pure-crunching-pike.md`), mirrored here in short form.
 
@@ -17,4 +17,4 @@ Full strategy + phased roadmap: see approved plan (`~/.claude/plans/pure-crunchi
 
 **Phases 1.5–4 + kill criteria**: picker site (shadcn model) → export adapters → team bundles (commercial wedge) → marketplace. Each gated on real usage of the previous phase.
 
-**Verification**: unit tests (`node --test test/`) + e2e against `BUNCH_CLAUDE_HOME` fake home (snapshot→wipe→restore round-trip, packs, zips, install). `claude` CLI calls auto-skipped when home override active.
+**Verification**: unit tests (`node --test test/`) + e2e against `RISHIIDEV_CLAUDE_HOME` fake home (snapshot→wipe→restore round-trip, packs, zips, install). `claude` CLI calls auto-skipped when home override active.

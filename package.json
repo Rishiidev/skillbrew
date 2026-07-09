@@ -1,10 +1,10 @@
 {
-  "name": "bunch",
+  "name": "rishiidev",
   "version": "0.1.0",
   "description": "Backup, restore, sync and bundle your Claude Code setup — skills, plugins, agents, connectors, config.",
   "type": "module",
   "bin": {
-    "bunch": "bin/bunch.js"
+    "rishiidev": "bin/rishiidev.js"
   },
   "engines": {
     "node": ">=18"

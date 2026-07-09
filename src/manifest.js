@@ -35,7 +35,7 @@ export function platformsFor(type) {
 export function emptyManifest() {
   return {
     manifestVersion: MANIFEST_VERSION,
-    tool: 'bunch',
+    tool: 'rishiidev',
     createdAt: new Date().toISOString(),
     lastSnapshot: null,
     machine: null,

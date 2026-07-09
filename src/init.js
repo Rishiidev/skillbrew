@@ -1,7 +1,7 @@
 import os from 'node:os';
 import path from 'node:path';
 import fs from 'node:fs';
-import { saveBunchConfig, loadBunchConfig } from './claude-paths.js';
+import { saveRishiidevConfig, loadRishiidevConfig } from './claude-paths.js';
 import { emptyManifest, saveManifest, loadManifest, manifestPath } from './manifest.js';
 import { run, mkdirp, exists } from './fsutil.js';
 
@@ -10,7 +10,7 @@ secrets.local.json
 .DS_Store
 `;
 
-const README = `# Claude setup backup (made with bunch)
+const README = `# Claude setup backup (made with rishiidev)
 
 This repo holds a full snapshot of a Claude Code environment: skills, agents,
 plugin list, connector list, and config.
@@ -19,16 +19,16 @@ plugin list, connector list, and config.
 
 Paste this into a fresh Claude Code session:
 
-> Clone https://github.com/REPLACE_ME/bunch and this backup repo, then run
-> \`node bunch/bin/bunch.js restore\` with BUNCH_REPO pointing at the backup
+> Clone https://github.com/Rishiidev/rishiidev and this backup repo, then run
+> \`node rishiidev/bin/rishiidev.js restore\` with RISHIIDEV_REPO pointing at the backup
 > repo clone. Follow the re-auth checklist it prints.
 
 Or by hand:
 
 \`\`\`bash
-git clone <this-repo> ~/bunch-backup
-git clone https://github.com/REPLACE_ME/bunch ~/bunch
-BUNCH_REPO=~/bunch-backup node ~/bunch/bin/bunch.js restore
+git clone <this-repo> ~/rishiidev-backup
+git clone https://github.com/Rishiidev/rishiidev ~/rishiidev
+RISHIIDEV_REPO=~/rishiidev-backup node ~/rishiidev/bin/rishiidev.js restore
 \`\`\`
 
 Secrets are never stored here — values are redacted; restore prints what needs
@@ -36,7 +36,7 @@ re-keying and which connectors need OAuth re-auth.
 `;
 
 export function init(dirArg, { github = false } = {}) {
-  const dir = path.resolve(dirArg || path.join(os.homedir(), 'bunch-backup'));
+  const dir = path.resolve(dirArg || path.join(os.homedir(), 'rishiidev-backup'));
   mkdirp(dir);
 
   if (!exists(path.join(dir, '.git'))) {
@@ -54,13 +54,13 @@ export function init(dirArg, { github = false } = {}) {
     saveManifest(dir, loadManifest(dir));
   }
 
-  const cfg = loadBunchConfig();
+  const cfg = loadRishiidevConfig();
   cfg.repoDir = dir;
-  saveBunchConfig(cfg);
+  saveRishiidevConfig(cfg);
 
   // gh repo create --push needs at least one commit
   run('git', ['add', '-A'], { cwd: dir });
-  run('git', ['commit', '-m', 'bunch init'], { cwd: dir });
+  run('git', ['commit', '-m', 'rishiidev init'], { cwd: dir });
 
   let remote = null;
   if (github) {
@@ -70,6 +70,6 @@ export function init(dirArg, { github = false } = {}) {
     else console.error(`gh repo create failed (continuing local-only): ${r.stderr || r.error?.message}`);
   }
 
-  console.log(`bunch: backup repo ready at ${dir}${remote ? ` (remote: ${remote})` : ' (local only — add a private GitHub remote for sync)'}`);
+  console.log(`rishiidev: backup repo ready at ${dir}${remote ? ` (remote: ${remote})` : ' (local only — add a private GitHub remote for sync)'}`);
   return dir;
 }
